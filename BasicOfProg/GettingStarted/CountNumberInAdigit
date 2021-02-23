@@ -1,0 +1,31 @@
+
+import java.util.Scanner;
+
+public class CountDigitsInANumber {
+
+    //  MY SOLN ...BUT I HAVE TAKEN INPUT IN STRING   ALTHOUGH I GOT FULL POINTS.....BUT IT ASKED FOR A NUMBER
+    //    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        String n = sc.nextLine();
+//        int count=0;
+//        for (int i = 0; i <n.length() ; i++) {
+//            count++;
+//        }
+//        System.out.println(count);
+//    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int dig=0;
+        while (n!=0){
+            n=n/10;
+            dig++;
+
+        }
+        System.out.println(dig);
+
+    }
+}
+
