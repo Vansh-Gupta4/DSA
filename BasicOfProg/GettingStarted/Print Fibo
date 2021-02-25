@@ -1,0 +1,24 @@
+
+import java.util.Scanner;
+
+public class PrintFibo {
+    public static void main(String[] args) {
+
+        Scanner scn = new Scanner(System.in);
+        int n =scn.nextInt();
+
+        int f = 0;
+
+        int s = 1 ;
+
+        while(n > 0){
+            System.out.println(f);
+            int t = f + s;
+            f = s;
+            s = t;
+            n = n - 1;
+
+        }
+    }
+
+}
