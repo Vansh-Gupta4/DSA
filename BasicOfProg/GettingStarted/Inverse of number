@@ -1,0 +1,20 @@
+
+import java.util.Scanner;
+//https://www.youtube.com/watch?v=O7PlWc9lOzg          -------GoodQues
+public class InverseOfNum {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int inv=0;
+        int origPlace=1;
+        while (n!=0){
+            int origDig=n%10;
+            int invDig=origPlace;
+            int invPlace=origDig;
+            inv=inv+invDig*(int)Math.pow(10,invPlace-1);
+            n=n/10;
+            origPlace++;
+        }
+        System.out.println(inv);
+    }
+}
