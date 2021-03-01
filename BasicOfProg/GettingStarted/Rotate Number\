@@ -1,0 +1,44 @@
+
+import java.util.Scanner;
+
+//good Ques
+//https://www.youtube.com/watch?v=lt8oCGqYMGg
+public class RotateNumber {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+
+        //To find No. of digits
+        int temp=n;
+        int NoOfDigit=0;
+        while(temp>0){
+            temp=temp/10;
+            NoOfDigit++;
+        }
+        k=k%NoOfDigit;
+        if (k<0){
+            k=k+NoOfDigit;
+        }
+
+        int divisor=1;      //to find divisor and multiplier
+        int multiplier=1;
+        for (int i = 1; i <=NoOfDigit ; i++) {
+            if(i<=k){
+                divisor=divisor*10;
+            }else {
+                multiplier=multiplier*10;
+            }
+        }
+
+
+        int quotient=n/divisor;
+        int remainder=n%divisor;
+
+         int rotate=remainder*multiplier+quotient;
+        System.out.println(rotate);
+
+
+    }
+}
