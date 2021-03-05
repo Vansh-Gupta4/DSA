@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class AnyBaseToAnyBase {
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int sourceBase = scn.nextInt();
+        int destBase = scn.nextInt();
+        int a=getValue(n,sourceBase,destBase);
+        System.out.println(a);
+    }
+    public static int getValue(int n,int sourceBase, int destBase) {
+        int d1 = anyBaseTodecimal(n, sourceBase);
+        int d2 = deciToAnyBase(d1, destBase);
+        return d2;
+    }
+    public static int anyBaseTodecimal(int n, int b){
+        int ans=0;
+        int power=1;
+        while (n>0){
+            int dig=n%10;
+            n=n/10;
+            ans+=dig*power;
+            power=power*b;
+        }
+        return ans;
+    }
+    public static int deciToAnyBase(int n, int b){
+        int ans=0;
+        int power=1;
+        while (n>0){
+            int dig=n%b;
+            n=n/b;
+            ans+=dig*power;
+            power=power*10;
+        }
+
+        return ans;
+    }
+
+}
