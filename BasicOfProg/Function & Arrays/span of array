@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class SpanOfArray {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ar = new int[n];
+        for (int i = 0; i < n; i++) {
+            ar[i] = sc.nextInt();
+        }
+        int max=MaxOfArray(ar);
+        int min=MinOfArray(ar);
+        int span=max-min;
+        System.out.println(span);
+    }
+    public static int MaxOfArray(int[] ar){
+        int M=ar[0];
+        for (int i = 1; i <ar.length ; i++) {
+            if(ar[i]>M){
+                M=ar[i];
+            }
+        }
+        return M;
+    }
+    public static int MinOfArray(int[] ar){
+        int M=ar[0];
+        for (int i = 1; i <ar.length ; i++) {
+            if(ar[i]<M){
+                M=ar[i];
+            }
+        }
+        return M;
+    }
+
+}
