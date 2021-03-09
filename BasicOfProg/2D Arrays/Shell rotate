@@ -1,0 +1,118 @@
+import java.util.Scanner;
+//https://www.youtube.com/watch?v=atMK9aA-s7Y----------very very good and tough ques
+public class ShellRotate {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
+        int[][] arr= new int [rows][cols];
+        for (int i = 0; i <arr.length ; i++) {
+            for (int j = 0; j <arr[i].length ; j++) {
+                arr[i][j]=sc.nextInt();
+
+            }
+        }
+        int s = sc.nextInt();
+        int r = sc.nextInt();
+        rotateshell(arr,s,r);
+        display(arr);
+    }
+
+    private static void rotateshell(int[][] arr, int s, int r) {
+        int[] oneD= FilloneDfromshell(arr,s);
+        rotate(oneD,r);
+        fillShellForoneD(arr,s,oneD);
+    }
+
+    private static void fillShellForoneD(int[][] arr, int s, int[] oneD) {
+        int minr=s-1;
+        int minc=s-1;
+        int maxr=arr.length-s;
+        int maxc=arr[0].length-s;
+
+        //lw
+        int idx=0;
+        for (int i = minr,j=minc; i <=maxr ; i++) {
+            arr[i][j]=oneD[idx];
+            idx++;
+        }
+        //bw
+        for (int i = maxr,j=minc+1; j <=maxc ; j++) {
+            arr[i][j]=oneD[idx];
+            idx++;
+        }
+        //rw
+        for (int i = maxr-1,j=maxc; i >=minr ; i--) {
+            arr[i][j]=oneD[idx];
+            idx++;
+        }
+        //tw
+        for (int i = minr,j=maxc-1; j >=minc+1;j--) {
+            arr[i][j]=oneD[idx];
+            idx++;
+        }
+
+    }
+
+    private static void rotate(int[] oneD, int r) {          //have done this before
+            r=r%oneD.length;
+            if (r<0){
+                r=r+oneD.length;
+            }
+            reverse(oneD,0,oneD.length-r-1);
+            reverse(oneD,oneD.length-r,oneD.length-1);
+            reverse(oneD,0,oneD.length-1);
+    }
+
+    private static void reverse(int[] oneD, int li, int ri) {
+        while (li<ri){
+            int temp=oneD[li];
+            oneD[li]=oneD[ri];
+            oneD[ri]=temp;
+            li++;
+            ri--;
+        }
+    }
+
+    private static int[] FilloneDfromshell(int[][] arr, int s) {
+        int minr=s-1;
+        int minc=s-1;
+        int maxr=arr.length-s;
+        int maxc=arr[0].length-s;
+        int size=2*(maxr-minr+maxc-minc); //can be explained by video only
+        int[] oneD= new int[size];
+         //lw
+        int idx=0;
+        for (int i = minr,j=minc; i <=maxr ; i++) {
+            oneD[idx]=arr[i][j];
+            idx++;
+        }
+        //bw
+        for (int i = maxr,j=minc+1; j <=maxc ; j++) {
+            oneD[idx]=arr[i][j];
+            idx++;
+        }
+        //rw
+        for (int i = maxr-1,j=maxc; i >=minr ; i--) {
+            oneD[idx]=arr[i][j];
+            idx++;
+        }
+        //tw
+        for (int i = minr,j=maxc-1; j >=minc+1;j--) {
+            oneD[idx]=arr[i][j];
+            idx++;
+        }
+        return oneD;
+    }
+
+
+    public static void display(int[][] arr){
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[0].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+}
