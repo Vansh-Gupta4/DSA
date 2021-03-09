@@ -1,0 +1,53 @@
+
+import java.util.Scanner;
+//https://www.youtube.com/watch?v=FUBlb360kqU    =====good ques
+public class ExitPointOfMatrix {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
+        int[][] arr= new int [rows][cols];
+        for (int i = 0; i <arr.length ; i++) {
+            for (int j = 0; j <arr[i].length ; j++) {
+                arr[i][j]=sc.nextInt();
+
+            }
+        }
+        int directon=0;      //drn=0 then its east....lly,drn=1 ==south......drn=2==west......drn=3==north
+        int i=0;
+        int j=0;
+
+        while(true){
+            directon=(directon+arr[i][j])%4;
+
+            if (directon==0){
+                j++;
+            }else if (directon==1){
+                i++;
+            }else if (directon==2){
+                j--;
+            }else if (directon==3){
+                i--;
+            }
+
+
+            if (i<0){
+                i++;
+                break;
+            }else if (j<0){
+                j++;
+                break;
+            }else if (i==arr.length){
+                i--;
+                break;
+            }else if (j==arr[0].length){
+                j--;
+                break;
+            }
+
+        }
+        System.out.println(i);
+        System.out.println(j);
+
+    }
+}
