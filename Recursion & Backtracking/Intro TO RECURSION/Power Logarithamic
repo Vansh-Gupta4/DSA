@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class PowerLinear {
+    public static void main(String[] args) throws Exception {
+        Scanner s=new Scanner(System.in);
+        int x=s.nextInt();
+        int n=s.nextInt();
+        int xn=power(x,n);
+        System.out.println(xn);
+    }
+
+    public static int power(int x, int n){
+        if (n==0){
+            return 1;
+        }
+        int xRaiseToNminus1=power(x,n-1);
+        return x*xRaiseToNminus1;
+    }
+}
