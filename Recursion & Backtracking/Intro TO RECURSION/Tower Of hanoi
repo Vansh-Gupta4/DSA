@@ -1,0 +1,17 @@
+public class TowerOfHanoi {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+//count function nhi bana
+        TowerofHanoi(n,"T1","T2","T3");
+    }
+    public static void TowerofHanoi(int n,String src,String destination,String helper){
+        if(n==0){  //base case
+            return;
+        }
+
+        TowerofHanoi(n-1,src,helper,destination);   //it will move n-1 disk from src to helper by help to desination
+        System.out.println("Move "+n+"th "+"disc from "+src+" to "+destination);
+        TowerofHanoi(n-1,helper,destination,src);
+    }
+}
