@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class GetSubseq {
+    public static void main(String[] args) throws Exception {
+            Scanner sc = new Scanner(System.in);
+            String str = sc.next();
+            ArrayList<String> res=gss(str);
+        System.out.println(res);
+    }
+
+    public static ArrayList<String> gss(String str) {
+        if (str.length()==0){
+            ArrayList<String> baseResult=new ArrayList<>();
+            baseResult.add("");
+            return baseResult;
+        }
+
+        char cc=str.charAt(0);
+        String RestOfString= str.substring(1);
+        ArrayList<String> myResult=new ArrayList<>();
+
+        ArrayList<String> RecursionResult=gss(RestOfString);
+        for (int i = 0; i <RecursionResult.size() ; i++) {
+            myResult.add(RecursionResult.get(i));
+
+        }
+        for (int i = 0; i <RecursionResult.size() ; i++) {
+            myResult.add(cc+RecursionResult.get(i));
+        }
+        return myResult;
+    }
+}
