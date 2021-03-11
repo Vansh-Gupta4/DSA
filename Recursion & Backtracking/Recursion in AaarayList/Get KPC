@@ -1,31 +1,34 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.lang.Integer.MAX_VALUE;
-import static java.lang.Integer.MIN_VALUE;
-
-public class MaxOfArray {
+public class GetKPC {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] a = new int[n];
-        for (int i = 0; i < a.length; i++) {
-            a[i] = sc.nextInt();
-        }
-        System.out.println(maxOfArray(a,0));
+        String str = sc.next();
+        ArrayList<String> res=getKPC(str);
+        System.out.println(res);
     }
-
-    public static int maxOfArray(int[] arr, int idx){
-        if (idx==arr.length-1){
-            return arr[idx];
+    static String[] codes={".;","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
+    public static ArrayList<String> getKPC(String str) {
+        if (str.length()==0){
+            ArrayList<String> baseResult=new ArrayList<>();
+            baseResult.add("");
+            return baseResult;
         }
 
-       int misa=maxOfArray(arr,idx+1);
-        if (misa>arr[idx]){
-            return misa;
-        }else{
-            return arr[idx];
-        }
+        char cc=str.charAt(0);
+        String RestOfString= str.substring(1);
+        ArrayList<String> RecursionResult=getKPC(RestOfString);
 
+        ArrayList<String> myResult=new ArrayList<>();
+        String codeforCH=codes[cc-'0'];
+        for (int i = 0; i <codeforCH.length() ; i++) {
+            char chCODE=codeforCH.charAt(i);
+            for (String rstr:RecursionResult){
+                myResult.add(chCODE+rstr);
+            }
+        }
+        return myResult;
     }
 
 }
