@@ -1,0 +1,62 @@
+import java.util.Scanner;
+//Good ques
+public class BuySellStocksKtransactions {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+        int k= sc.nextInt();
+        
+        int[][] dp = new int[k+1][n];
+
+        for (int t = 1; t <=k ; t++) {
+            for (int d = 1; d <arr.length ; d++) {
+                int max = dp[t][d-1];
+
+                for (int pd = 0; pd < d ; pd++) {
+                    int pTill_Tminus1=dp[t-1][pd];
+                    int ptth=arr[d]-arr[pd];
+
+                    if (pTill_Tminus1+ptth>max){
+                        max=pTill_Tminus1+ptth;
+                    }
+                }
+               dp[t][d]=max;
+            }
+        }
+        System.out.println(dp[k][n-1]);
+    }
+}
+//OPTIMISED SOLUTION i.e. in n^2....prev soln was in n^3
+//public static void main(String[] args) {
+//    Scanner sc = new Scanner(System.in);
+//    int n = sc.nextInt();
+//    int[] arr = new int[n];
+//    for (int i = 0; i < arr.length; i++) {
+//        arr[i] = sc.nextInt();
+//    }
+//    int k= sc.nextInt();
+//
+//    int[][] dp = new int[k+1][n];
+//
+//    for (int t = 1; t <=k ; t++) {
+//            int max=Integer.MIN_VALUE;
+
+//
+//        for (int d = 1; d <arr.length ; d++) {
+//          if(dp[t-1][d-1]-arr[d-1] > max){
+//                  max = dp[t-1][d-1]-arr[d-1];
+//                  }
+//           if(max + arr[d] > dp[t][d-1]){
+//              dp[t][d]=max+arr[d];
+//
+//            }else{
+//            dp[t][d]=dp[t][d-1];
+//              }
+//        }
+//    }
+//    System.out.println(dp[k][n-1]);
+//}
