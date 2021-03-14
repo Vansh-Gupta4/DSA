@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class FiboDP {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] qb=new int[n+1];
+
+        System.out.println(FiboDP(n,qb));
+    }
+    public static int FiboDP(int n, int[] qb){
+        if (n==0 || n==1){
+            return n;
+        }
+        if (qb[n]!=0){
+            return qb[n];
+        }
+        int fibo1=FiboDP(n-1,qb);
+        int fibo2=FiboDP(n-2,qb);
+        int fibo=fibo1+fibo2;
+        qb[n]=fibo;
+        return fibo;
+    }
+
+}
