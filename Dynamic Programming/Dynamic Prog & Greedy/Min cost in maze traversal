@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class MinCostInMazeTraversal {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
+        int[][]arr= new int [rows][cols];
+        for (int i = 0; i <arr.length ; i++) {
+            for (int j = 0; j <arr[i].length ; j++) {
+                arr[i][j]=sc.nextInt();
+            }
+        }
+        int [][]dp=new int[rows][cols];
+
+        for (int i = dp.length-1; i >=0 ; i--) {   //kyuki ques hum desn se source (i.e peeche se aage )jaa rhe h
+            for (int j = dp[0].length-1; j >=0 ; j--) {
+  //              Divide ques in 4 parts  i.e.  last row,last col,desn and rest of ques
+
+                if (i==dp.length-1 && j==dp[0].length-1){   //for last cell
+                    dp[i][j]=arr[i][j];
+                }else if (i==dp.length-1){   //for last row
+                    dp[i][j]=dp[i][j+1] + arr[i][j];
+                }else if (j==dp[0].length-1){    // for last col
+                    dp[i][j]=dp[i+1][j] + arr[i][j];
+                }else{           //rest of ques
+                    dp[i][j]=Math.min(dp[i+1][j],dp[i][j+1]) + arr[i][j];
+                }
+            }
+
+        }
+        System.out.println(dp[0][0]);
+
+    }
+}
