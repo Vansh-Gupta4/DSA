@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class PartitionIntoSubsets {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        if (n==0 || k==0 || n<k){
+            System.out.println(0);
+            return;
+        }
+
+        long[][] dp= new long[k+1][n+1];
+
+        for (int teams = 1; teams <=k ; teams++) {
+            for (int peoples = 1; peoples <=n ; peoples++) {
+                if (peoples<teams){
+                    dp[teams][peoples]=0;
+                }else if (peoples==teams){
+                    dp[teams][peoples]=1;
+                }else{
+                    dp[teams][peoples]=dp[teams-1][peoples-1]+dp[teams][peoples-1] * teams;
+                }
+            }
+        }
+        System.out.println(dp[k][n]);
+    }
+}
