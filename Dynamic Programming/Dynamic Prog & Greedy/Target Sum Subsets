@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class TargetSumSubset {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n= sc.nextInt();
+        int[] arr=new int[n];
+        for (int i = 0; i <arr.length; i++) {
+            arr[i]=sc.nextInt();
+        }
+        int target= sc.nextInt();
+        boolean [][]dp=new boolean[n+1][target+1];
+        //divide in 4 parts i.e.first element,first row,first col,rest of ques
+        for (int i = 0; i <dp.length ; i++) {
+            for (int j = 0; j <dp[0].length; j++) {
+                if (i==0 && j==0){    //for first element
+                    dp[i][j]=true;
+                }else if (i==0){     //first row
+                    dp[i][j]=false;
+                }else if (j==0){     //first col
+                    dp[i][j]=true;
+                }else{          //rest of ques
+                   if (dp[i-1][j]==true){
+                       dp[i][j]=true;
+                   }else {
+                       int val=arr[i-1];
+                       if (j>=val){
+                           if (dp[i-1][j-val]==true){
+                               dp[i][j]=true;
+                           }
+                       }
+                   }
+                }
+            }
+        }
+        System.out.println(dp[arr.length][target]);
+    }
+}
