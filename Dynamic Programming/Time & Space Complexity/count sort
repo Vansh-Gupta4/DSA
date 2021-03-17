@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class CountSort {
+//    It is used when there are large no. of elements in array BUT elements DONT vary too much
+//    eg in [ 9 6 5 7 9 4 5 9 3 4 7 5 8 ] ...all elements are in between 3 to 9 .therefore to
+//    sort this we can use count sort
+
+// algo- 1.scan array and find min and max
+//    2.make freq array of that range i.e.range of (max-min+1)
+//    3.0th index stands for freq of min element....lly,1st index
+//      stands for freq of next element.....lly for all elements
+//    4.calculate prefix sum array(by adding freq of all prev and now) for freq becoz stable banana h(i.e.agar 2 same elements h toh jo phle aaya h original array mai whai sort hone ke baad phele aayega)
+//    5.(-1)    from prefix sum array....now values remained shows ki voh aakri element konsi posn par h
+//    6.now put reverse loop on original array....jo bhi element aate rhe voh prefix sum array se kum karte jao aur element ko prefix sum array ki hisaab se answer array mai put karte jao
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr=new int[n];
+        int max=Integer.MIN_VALUE;
+        int min =Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+            max=Math.max(max,arr[i]);
+            min=Math.min(min,arr[i]);
+        }
+        countSort(arr,min,max);
+        for(int i=0; i<arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+    public static void countSort(int[] arr,int min,int max){
+        int range=max-min+1;
+//       creating freq array
+        int[] freq=new int[range];
+        for (int i = 0; i <arr.length ; i++) {
+            int idx=arr[i]-min;
+            freq[idx]++;
+        }
+
+
+//        now for stable sort,create prefix sum array
+        for (int i =1; i <freq.length ; i++) {
+            freq[i]=freq[i]+freq[i-1];
+        }
+
+
+//        put reverse loop and fill ans array
+        int [] ans =new int[arr.length];
+        for (int i = arr.length-1; i >=0 ; i--) {
+            int val=arr[i];
+            int psn=freq[val-min];
+            int idx=psn-1;
+            ans[idx]=val;
+            freq[val-min]--;
+        }
+        for (int i = 0; i <ans.length ; i++) {
+            arr[i]=ans[i];
+
+        }
+    }
+
+}
