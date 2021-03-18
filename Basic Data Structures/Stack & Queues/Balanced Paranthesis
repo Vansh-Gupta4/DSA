@@ -1,0 +1,57 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class BalancedParanthesis {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sc =new Scanner(System.in);
+        String str= sc.nextLine();
+
+        Stack<Character> stack= new Stack<>();
+
+        for(int i=0;i<str.length();i++ ){
+            if(str.charAt(i)=='{'  || str.charAt(i)=='(' || str.charAt(i)=='[' ){
+                stack.push(str.charAt(i));
+            }else if(str.charAt(i)=='}'){
+                if(stack.size()==0){
+                    System.out.println(false);
+                    return;
+                }else if(stack.peek() !='{'){
+                    System.out.println(false);
+                    return;
+                }else{
+                    stack.pop();
+                }
+            }else if(str.charAt(i)==')'){
+                if(stack.size()==0){
+                    System.out.println(false);
+                    return;
+                }else if(stack.peek() !='('){
+                    System.out.println(false);
+                    return;
+                }else{
+                    stack.pop();
+                }
+            }else if(str.charAt(i)==']'){
+                if(stack.size()==0){
+                    System.out.println(false);
+                    return;
+                }else if(stack.peek() !='['){
+                    System.out.println(false);
+                    return;
+                }else{
+                    stack.pop();
+                }
+            }
+        }
+        if(stack.size()==0){
+            System.out.println(true);
+        }else{
+            System.out.println(false);
+        }
+
+
+    }
+
+
+}
