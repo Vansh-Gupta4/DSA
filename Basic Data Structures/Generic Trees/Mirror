@@ -1,0 +1,52 @@
+
+import java.util.Scanner;
+
+public class DiffOfTwoArrays {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] ar = new int[n];
+        for (int i = 0; i <ar.length; i++) {
+            ar[i] = sc.nextInt();
+        }
+        int m = sc.nextInt();
+        int[] ar2 = new int[m];
+        for (int i = 0; i <ar2.length; i++) {
+            ar2[i] = sc.nextInt();
+        }
+        int[] diff =new int[m];
+        int carry=0;
+        int i=ar.length-1;
+        int j=ar2.length-1;
+        int k=diff.length-1;
+
+        while(k>=0){
+            int d=0;
+            int arval=i>=0?ar[i]:0;
+            if (ar2[j]+carry>=arval){
+                d=ar2[j]+carry-arval;
+                carry=0;
+            }else{
+                d=ar2[j]+carry+10-arval;
+                carry=-1;
+            }
+            diff[k]=d;
+            i--;
+            j--;
+            k--;
+
+        }
+        int idx=0;
+        while (idx<diff.length){
+            if (diff[idx]==0){
+                idx++;
+            }else{
+                break;
+            }
+        }
+        while (idx<diff.length){
+            System.out.println(diff[idx]);
+            idx++;
+        }
+    }
+}
